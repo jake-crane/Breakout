@@ -1,4 +1,5 @@
 ﻿///<reference path="Brick.ts" />
+///<reference path="Paddle.ts" />
 var canvas = <HTMLCanvasElement>document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 var ballRadius = 10;
@@ -6,9 +7,8 @@ var x = canvas.width / 2;
 var y = canvas.height - 30;
 var dx = 2;
 var dy = -2;
-var paddleHeight = 10;
-var paddleWidth = 75;
-var paddleX = (canvas.width - paddleWidth) / 2;
+var paddle: Paddle = new Paddle(75, 10);
+paddle.setX((canvas.width - paddle.getWidth()) / 2);
 var rightPressed = false;
 var leftPressed = false;
 var brick: Brick;
@@ -76,7 +76,7 @@ function drawBall() {
 }
 function drawPaddle() {
     ctx.beginPath();
-    ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+    ctx.rect(paddle.getX(), canvas.height - paddle.getHeight(), paddle.getWidth(), paddle.getHeight());
     ctx.fillStyle = "green";
     ctx.fill();
     ctx.closePath();
@@ -124,7 +124,7 @@ function draw() {
     if (y + dy < ballRadius) {
         dy = -dy;
     } else if (y + dy > canvas.height - ballRadius) {
-        if (x > paddleX && x < paddleX + paddleWidth) {
+        if (x > paddle.getX() && x < paddle.getX() + paddle.getWidth()) {
             dy = -dy;
         } else {
             lives--;
@@ -136,15 +136,15 @@ function draw() {
                 y = canvas.height - 30;
                 dx = 3;
                 dy = -3;
-                paddleX = (canvas.width - paddleWidth) / 2;
+                paddle.setX((canvas.width - paddle.getWidth()) / 2);
             }
         }
     }
 
-    if (rightPressed && paddleX < canvas.width - paddleWidth) {
-        paddleX += 7;
-    } else if (leftPressed && paddleX > 0) {
-        paddleX -= 7;
+    if (rightPressed && paddle.getX() < canvas.width - paddle.getWidth()) {
+        paddle.setX(paddle.getX() + 7);
+    } else if (leftPressed && paddle.getX() > 0) {
+        paddle.setX(paddle.getX() - 7);
     }
 
     x += dx;
