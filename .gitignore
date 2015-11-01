@@ -24,6 +24,7 @@ bld/
 Breakout/app.js
 Breakout/Brick.js
 Breakout/Paddle.js
+Breakout/Game.js
 
 # Visual Studio 2015 cache/options directory
 .vs/

@@ -29,6 +29,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Brick.ts" />
+    <TypeScriptCompile Include="Game.ts" />
     <TypeScriptCompile Include="Paddle.ts" />
   </ItemGroup>
   <ItemGroup>
